@@ -146,6 +146,13 @@ None
 
 This means the public workflow starts with no user LoRA and no bypass/modifier LoRA. Set a real LoRA name and strength only if you have the LoRA installed.
 
+The included `KreaHighStrengthLoraModelOnly` node supports `None` as a pass-through value. If you already have an older custom node with the same class name and `None` is not available in the dropdown, the workflow can fail validation. Use the included node or update the older node to support `None`.
+
+Important distinction:
+
+- Optional: Krea2 filter bypass / modifier LoRA file
+- Required: `ComfyUI-krea2-negpip` custom node, because the workflow uses `ApplyKrea2NegPiP`
+
 ## 5. LM Studio
 
 Required:

@@ -17,6 +17,8 @@ Krea2 StyleBridge is an unofficial ComfyUI workflow that separates **what to dra
 
 公開用の初期状態では、LoRAとfilter bypass系LoRAはどちらも `None` / `0.0` です。必要な人だけ後から選択してください。
 
+`None` は同梱の `KreaHighStrengthLoraModelOnly` が処理します。古い同名ノードを別のcustom nodeから使っている環境では、`None` が選択肢に出ずエラーになることがあります。その場合は、このリポジトリ同梱のcustom nodeを使うか、既存ノードを `None` pass-through 対応版に更新してください。
+
 ## ワークフロー名
 
 **Krea2 StyleBridge for ComfyUI**
@@ -205,6 +207,8 @@ beta: 3.5
 
 Krea2では通常のネガティブプロンプトが弱い場合があります。  
 このワークフローでは `KreaPromptAvoidWeights` でAvoid語を `(term:-1.00)` 形式に変換し、ポジティブプロンプト側へ統合します。
+
+注意: filter bypass / modifier LoRA は任意ですが、`ApplyKrea2NegPiP` ノード自体はworkflow内で使っています。`ComfyUI-krea2-negpip` はインストールしてください。
 
 例:
 
