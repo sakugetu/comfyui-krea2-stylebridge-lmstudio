@@ -90,10 +90,12 @@ class LMStudioPromptControlV4:
                             "If faithful_image_prompt is OFF, use the enabled sources as loose inspiration and make a coherent final scene that follows the user text.\n\n"
                             "If exclude_style_from_prompt is ON, do not describe art style, rendering style, medium, artist influence, camera film stock, illustration type, "
                             "model aesthetic, texture treatment, color grading, line art, cel shading, painterly quality, photorealism, anime style, 3D style, cinematic look, "
-                            "grain, bokeh, lens effects, lighting treatment, atmosphere, mood, or overall finish. If exclude_style_from_prompt is OFF, you may include visible "
-                            "style and finish details from the enabled image references, but keep them concise and do not override the user text.\n\n"
+                            "grain, bokeh, lens effects, lighting treatment, atmosphere, mood, or overall finish when those style cues come from image references. "
+                            "Do not remove style, medium, rendering, or aesthetic instructions explicitly written in text_prompt. If exclude_style_from_prompt is OFF, you may include visible "
+                            "style and finish details from the enabled image references, but keep them concise and do not override the user text. User-written style instructions remain mandatory.\n\n"
                             "If use_text_prompt is enabled, the user text is mandatory and has highest priority. If the user text is Japanese or another non-English language, "
-                            "translate its meaning into natural English and blend it with enabled visual content. If no content image is enabled, expand only the user text and "
+                            "translate its meaning into natural English and blend it with enabled visual content. Preserve explicit user-written style requests such as Japanese anime style, "
+                            "anime illustration, cel shading, watercolor, photorealism, 3D render, manga style, or any other named aesthetic. A style request must never replace the subject, species, object, action, or scene requested by the user. If the user asks for a cat, the final subject must be a cat, not a person or character. If no content image is enabled, expand only the user text and "
                             "do not invent a different main subject.\n\n"
                             "Create one coherent final scene with one subject arrangement, one camera view, and one continuous physical space. Do not mention references as references, "
                             "examples, panels, comparisons, before-and-after views, split screens, collages, or separate sources. Do not invent unrelated objects, extra characters, "
@@ -170,9 +172,9 @@ class LMStudioPromptControlV4:
             enabled.append("image_2")
 
         style_rule = (
-            "Style exclusion is ON. Remove style and finish terms from the final prompt; content and composition only."
+            "Style exclusion is ON. Remove style and finish terms only when they come from image references; keep every style, medium, rendering, or aesthetic instruction explicitly written in text_prompt."
             if exclude_style_from_prompt
-            else "Style exclusion is OFF. You may include concise visible style, finish, lighting, and rendering details from enabled image references."
+            else "Style exclusion is OFF. You may include concise visible style, finish, lighting, and rendering details from enabled image references, and you must preserve style instructions written in text_prompt."
         )
         fidelity_rule = (
             "Faithful image prompting is ON. Preserve enabled image content details closely unless the user text directly conflicts."
@@ -193,7 +195,9 @@ class LMStudioPromptControlV4:
                     "type": "text",
                     "text": (
                         "User content request. Translate to natural English if needed and merge it into the final prompt. "
-                        "The user text's main subject and action must remain visible: "
+                        "The user text's main subject, action, and any explicitly requested style, medium, rendering mode, or aesthetic must remain visible. "
+                        "Do not replace the user's subject with a different subject. Style changes the rendering only, not the subject, species, object, action, or scene. "
+                        "If the user asks for Japanese anime style, write that clearly in English as Japanese anime-style illustration or equivalent while keeping the requested subject unchanged: "
                         f"{text_prompt}"
                     ),
                 }
