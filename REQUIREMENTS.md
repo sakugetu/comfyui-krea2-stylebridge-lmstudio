@@ -1,60 +1,60 @@
-# Requirements
+# 必要環境
 
-This workflow is not a one-click standalone package. It combines Krea2 local inference, LM Studio vision prompting, Krea2 NegPiP, and Untwisting RoPE style transfer.
+このワークフローは、単体で完結するワンクリック版ではありません。Krea2のローカル推論、LM Studioによる画像/日本語プロンプト解析、Krea2 NegPiP、Untwisting RoPEによるスタイル参照を組み合わせて使います。
 
-このワークフローは単体では完結しません。必要なモデル、custom node、LM Studio環境を先に揃えてください。
+先に、必要なモデル、custom node、LM Studio環境を揃えてください。
 
 ## 1. ComfyUI
 
-Required:
+必要なもの:
 
-- Recent ComfyUI build with Krea2 support
-- Python environment that can run Krea2 / Qwen3-VL text encoder
-- GPU memory appropriate for Krea2
+- Krea2に対応した比較的新しいComfyUI
+- Krea2 / Qwen3-VL系text encoderを動かせるPython環境
+- Krea2を動かせるGPUメモリ
 
-Tested locally with:
+ローカル検証で使った構成:
 
 - Krea2 Turbo fp8
-- Qwen3-VL / Huihui-Qwen3-VL text encoder
+- Qwen3-VL text encoder
 - Qwen Image VAE
 
-## 2. Included custom node
+## 2. 同梱custom node
 
-This repository includes:
+このリポジトリには、次のcustom nodeを同梱しています。
 
 ```text
 custom_nodes/ComfyUI-Krea2-StyleBridge
 ```
 
-It provides:
+含まれるノード:
 
-| Node | Purpose |
+| Node | 役割 |
 |---|---|
-| `LMStudioPromptControlV4` | Sends Japanese/text and optional image references to LM Studio and returns a Krea2 prompt |
-| `KreaPromptAvoidWeights` | Converts avoid terms into Krea-style prompt weights such as `(split screen:-1.00)` |
-| `KreaHighStrengthLoraModelOnly` | Optional model-only LoRA loader with a large strength range and `None` pass-through |
-| `KreaAspectRatioAreaSizeV2` | Aspect ratio dropdown with 1024 / 1280 base-area switch |
+| `LMStudioPromptControlV4` | 日本語テキストや参照画像をLM Studioへ送り、Krea2向け英語プロンプトを返します |
+| `KreaPromptAvoidWeights` | avoid語を `(split screen:-1.00)` のようなKrea2向け負方向ウェイトへ変換します |
+| `KreaHighStrengthLoraModelOnly` | 高strength対応のmodel-only LoRA loaderです。`None` pass-throughに対応しています |
+| `KreaAspectRatioAreaSizeV2` | 1024 / 1280の基準面積を切り替えられる画角ドロップダウンです |
 
-Install it into:
+インストール先:
 
 ```text
 ComfyUI/custom_nodes/ComfyUI-Krea2-StyleBridge
 ```
 
-Then restart ComfyUI.
+コピー後、ComfyUIを再起動してください。
 
-## 3. External custom nodes
+## 3. 外部custom node
 
-### Required
+### 必須
 
-| Node Type in Workflow | Custom Node / Source | Why |
+| ワークフロー内のNode Type | custom node / source | 必要な理由 |
 |---|---|---|
-| `ApplyKrea2NegPiP` | `blue-pen5805/ComfyUI-krea2-negpip` | Enables negative prompt weights inside the Krea2 prompt |
-| `RFInversion` | `BigStationW/ComfyUi-Untwisting-RoPE` | Builds the style/reference trajectory |
-| `UntwistingRoPE` | `BigStationW/ComfyUi-Untwisting-RoPE` | Applies the style reference through RoPE attention patching |
-| `UnofficialExtensions` | `BigStationW/ComfyUi-Untwisting-RoPE` | Optional controls used by the workflow |
+| `ApplyKrea2NegPiP` | `blue-pen5805/ComfyUI-krea2-negpip` | Krea2のプロンプト内で負方向ウェイトを使うため |
+| `RFInversion` | `BigStationW/ComfyUi-Untwisting-RoPE` | スタイル参照用のtrajectoryを作るため |
+| `UntwistingRoPE` | `BigStationW/ComfyUi-Untwisting-RoPE` | RoPE attention patchingでスタイル参照を反映するため |
+| `UnofficialExtensions` | `BigStationW/ComfyUi-Untwisting-RoPE` | ワークフロー内の追加制御に使います |
 
-Install:
+インストール例:
 
 ```bash
 cd ComfyUI/custom_nodes
@@ -62,33 +62,33 @@ git clone https://github.com/blue-pen5805/ComfyUI-krea2-negpip
 git clone https://github.com/BigStationW/ComfyUi-Untwisting-RoPE
 ```
 
-### Krea2 adapter for Untwisting RoPE
+### Untwisting RoPE用Krea2 adapter
 
-Untwisting RoPE needs a Krea2 adapter file. In the tested setup, a community `krea2.py` adapter was placed here:
+Untwisting RoPEでKrea2を扱うには、Krea2用adapterが必要です。検証環境では、community版の `krea2.py` を次の場所に配置しました。
 
 ```text
 ComfyUI/custom_nodes/ComfyUi-Untwisting-RoPE/models/krea2.py
 ```
 
-Without this adapter, `UntwistingRoPE` may load but will not patch Krea2 correctly.
+このadapterがない場合、`UntwistingRoPE` ノード自体は読み込めても、Krea2に正しくpatchできないことがあります。
 
-### Optional but useful
+### 追加の画像読み込みノードについて
 
-The public workflow uses standard `LoadImage`, `ImageScale`, and ComfyUI core nodes. It does not require extra image-loader nodes.
+公開用ワークフローは、標準の `LoadImage`、`ImageScale`、ComfyUI core nodeを使います。追加の画像loader系custom nodeは不要です。
 
-## 4. Model files
+## 4. モデルファイル
 
-You need to have equivalent model files in your ComfyUI model folders. Names in the workflow are examples; change dropdowns to match your local files.
+ワークフロー内のモデル名は例です。自分のComfyUI環境にあるファイル名に合わせて、各ノードのドロップダウンを変更してください。
 
 ### Diffusion model
 
-Example:
+例:
 
 ```text
 models/unet/Krea2/krea2_turbo_fp8_scaled.safetensors
 ```
 
-Node:
+使用ノード:
 
 ```text
 UNETLoader
@@ -96,90 +96,89 @@ UNETLoader
 
 ### Text encoder
 
-Examples:
+例:
 
 ```text
 models/text_encoders/qwen3vl_4b_bf16.safetensors
-models/text_encoders/Huihui-Qwen3-VL-4B-Instruct-abliterated-fp8_scaled.safetensors
 ```
 
-Public workflow default:
+公開ワークフローの既定値:
 
 ```text
 models/text_encoders/qwen3vl_4b_fp8_scaled.safetensors
 ```
 
-Node:
+使用ノード:
 
 ```text
 CLIPLoader
 ```
 
-If an fp8 text encoder fails to load in your environment, try a bf16 Qwen3-VL text encoder.
+fp8 text encoderが環境によって読めない場合は、bf16のQwen3-VL系text encoderを試してください。
 
 ### VAE
 
-Example:
+例:
 
 ```text
 models/vae/qwen_image_vae.safetensors
 ```
 
-Node:
+使用ノード:
 
 ```text
 VAELoader
 ```
 
-### Optional LoRAs
+### 任意のLoRA
 
-The workflow has two optional LoRA slots:
+ワークフローには、2つの任意LoRAスロットがあります。
 
-- Optional user LoRA
-- Optional Krea2 modifier LoRA / filter bypass
+- 任意のuser LoRA
+- 任意のKrea2 modifier LoRA / filter bypass LoRA
 
-Both default to:
+公開用の初期値はどちらも次です。
 
 ```text
 None
 ```
 
-This means the public workflow starts with no user LoRA and no bypass/modifier LoRA. Set a real LoRA name and strength only if you have the LoRA installed.
+つまり、公開ワークフローはuser LoRAもbypass/modifier LoRAも使わない状態から始まります。LoRAを持っている場合だけ、実ファイル名とstrengthを設定してください。
 
-The included `KreaHighStrengthLoraModelOnly` node supports `None` as a pass-through value. If you already have an older custom node with the same class name and `None` is not available in the dropdown, the workflow can fail validation. Use the included node or update the older node to support `None`.
+同梱の `KreaHighStrengthLoraModelOnly` は、`None` をそのまま通すpass-throughに対応しています。古い同名custom nodeを使っていて、ドロップダウンに `None` が出ない場合は、ワークフロー検証で失敗することがあります。その場合は、このリポジトリ同梱版を使うか、既存ノードを `None` 対応版に更新してください。
 
-Important distinction:
+重要な区別:
 
-- Optional: Krea2 filter bypass / modifier LoRA file
-- Required: `ComfyUI-krea2-negpip` custom node, because the workflow uses `ApplyKrea2NegPiP`
+- 任意: Krea2 filter bypass / modifier LoRAファイル
+- 必須: `ComfyUI-krea2-negpip` custom node
+
+このワークフローは `ApplyKrea2NegPiP` を使うため、bypass LoRAファイルを使わない場合でも `ComfyUI-krea2-negpip` は必要です。
 
 ## 5. LM Studio
 
-Required:
+必要なもの:
 
-- LM Studio running locally
-- OpenAI-compatible server enabled
-- A vision-capable model loaded
+- LM Studioがローカルで起動していること
+- OpenAI互換API serverが有効になっていること
+- 画像を読めるvision対応モデルが読み込まれていること
 
-Default API endpoint:
+既定のAPI endpoint:
 
 ```text
 http://127.0.0.1:1234/v1
 ```
 
-Recommended model:
+推奨モデル:
 
 ```text
 qwen3-vl-32b-instruct
 ```
 
-Smaller vision models can work, but may ignore Japanese text or invent unrelated content. If Japanese text is not reflected, explicitly select a stronger model in the `model` field.
+小さいvision modelでも動くことはありますが、日本語テキストを無視したり、画像にない内容を発明したりすることがあります。日本語指示が反映されない場合は、`model` 欄で強めのvision modelを明示してください。
 
-## 6. Workflow node types
+## 6. 使用するノード一覧
 
-The workflow uses these node types:
-
-### ComfyUI core / Krea2 nodes
+### ComfyUI core / Krea2系
 
 - `LoadImage`
 - `ImageScale`
@@ -194,73 +193,73 @@ The workflow uses these node types:
 - `SaveImage`
 - `Note`
 
-### Included in this repository
+### このリポジトリに同梱
 
 - `LMStudioPromptControlV4`
 - `KreaPromptAvoidWeights`
 - `KreaHighStrengthLoraModelOnly`
 - `KreaAspectRatioAreaSizeV2`
 
-### External
+### 外部custom node
 
 - `ApplyKrea2NegPiP`
 - `RFInversion`
 - `UntwistingRoPE`
 - `UnofficialExtensions`
 
-## 7. Common setup checklist
+## 7. セットアップ手順
 
-1. Install ComfyUI.
-2. Install Krea2 model, text encoder, and VAE.
-3. Install this repository's `ComfyUI-Krea2-StyleBridge` custom node.
-4. Install `ComfyUI-krea2-negpip`.
-5. Install `ComfyUi-Untwisting-RoPE`.
-6. Add the Krea2 adapter under Untwisting RoPE's `models` folder.
-7. Start LM Studio and load a vision-capable model.
-8. Start ComfyUI.
-9. Open `workflows/krea2_stylebridge_lmstudio_rope_v5_ascii_titles.json`.
-10. Select image 1/2 for content and image 3 for style.
-11. Adjust model dropdowns to your local file names.
+1. ComfyUIをインストールします。
+2. Krea2 model、text encoder、VAEを配置します。
+3. このリポジトリ同梱の `ComfyUI-Krea2-StyleBridge` custom nodeをインストールします。
+4. `ComfyUI-krea2-negpip` をインストールします。
+5. `ComfyUi-Untwisting-RoPE` をインストールします。
+6. Untwisting RoPEの `models` フォルダへKrea2 adapterを追加します。
+7. LM Studioを起動し、vision対応モデルを読み込みます。
+8. ComfyUIを起動します。
+9. `workflows/krea2_stylebridge_lmstudio_rope_v5_ascii_titles.json` を開きます。
+10. 画像1/2に内容参照、画像3にスタイル参照を入れます。
+11. モデル名のドロップダウンを自分の環境に合わせます。
 
-## 8. Troubleshooting
+## 8. トラブルシュート
 
-### Missing node: `LMStudioPromptControlV4`
+### `LMStudioPromptControlV4` がMissing Nodeになる
 
-Install this repository's custom node and restart ComfyUI.
+このリポジトリ同梱のcustom nodeを `ComfyUI/custom_nodes` に入れて、ComfyUIを再起動してください。
 
-### Missing node: `ApplyKrea2NegPiP`
+### `ApplyKrea2NegPiP` がMissing Nodeになる
 
-Install `ComfyUI-krea2-negpip`.
+`ComfyUI-krea2-negpip` をインストールしてください。
 
-### Missing node: `RFInversion` / `UntwistingRoPE`
+### `RFInversion` / `UntwistingRoPE` がMissing Nodeになる
 
-Install `ComfyUi-Untwisting-RoPE`.
+`ComfyUi-Untwisting-RoPE` をインストールしてください。
 
-### Untwisting RoPE does not affect Krea2
+### Untwisting RoPEがKrea2に効かない
 
-Check that the Krea2 adapter exists:
+Krea2 adapterがあるか確認してください。
 
 ```text
 ComfyUI/custom_nodes/ComfyUi-Untwisting-RoPE/models/krea2.py
 ```
 
-### Spatial mismatch error
+### Spatial mismatch errorが出る
 
-Untwisting RoPE requires the style reference latent size to match the generated latent size. This workflow resizes image 3 to the chosen output width and height before VAE encoding. If you modify the graph, keep this rule.
+Untwisting RoPEでは、スタイル参照画像のlatent sizeと生成latent sizeを合わせる必要があります。このワークフローでは、画像3を選択した出力width / heightへresizeしてからVAE Encodeしています。グラフを改造する場合も、このルールは維持してください。
 
-### LM Studio ignores Japanese text
+### LM Studioが日本語テキストを無視する
 
-Use a stronger vision/text model such as:
+強めのvision/text modelを使ってください。
 
 ```text
 qwen3-vl-32b-instruct
 ```
 
-Also check that `use_text_prompt` is ON.
+また、`use_text_prompt` がONになっているか確認してください。
 
-### Style reference leaks unwanted people or layout
+### スタイル参照画像から人物や構図が漏れる
 
-Add avoid terms:
+Avoid欄に次のような語を追加してください。
 
 ```text
 person
@@ -271,7 +270,7 @@ two people
 copied composition from style reference
 ```
 
-Or reduce RoPE strength:
+またはRoPE強度を下げてください。
 
 ```text
 adain_strength: 0.50
