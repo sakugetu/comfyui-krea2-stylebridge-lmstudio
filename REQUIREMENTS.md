@@ -217,9 +217,11 @@ qwen3-vl-32b-instruct
 6. Untwisting RoPEの `models` フォルダへKrea2 adapterを追加します。
 7. LM Studioを起動し、vision対応モデルを読み込みます。
 8. ComfyUIを起動します。
-9. `workflows/krea2_stylebridge_lmstudio_rope_v5_ascii_titles.json` を開きます。
+9. `workflows/krea2_stylebridge_lmstudio_rope_v6_rope_switch.json` を開きます。
 10. 画像1/2に内容参照、画像3にスタイル参照を入れます。
 11. モデル名のドロップダウンを自分の環境に合わせます。
+
+RoPEスタイル参照を使わない場合は、`Use RoPE style reference switch - OFF skips RoPE branch` の `use_rope_style_reference` をOFFにしてください。OFFの場合、lazy switchによりRoPE側の重い枝は実行されません。
 
 ## 8. トラブルシュート
 

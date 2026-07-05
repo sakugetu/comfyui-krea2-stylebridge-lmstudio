@@ -35,7 +35,7 @@ Krea2 StyleBridge is an unofficial ComfyUI workflow that separates **what to dra
 ## 同梱ファイル
 
 ```text
-workflows/krea2_stylebridge_lmstudio_rope_v5_ascii_titles.json
+workflows/krea2_stylebridge_lmstudio_rope_v6_rope_switch.json
 custom_nodes/ComfyUI-Krea2-StyleBridge/
 ```
 
@@ -82,7 +82,7 @@ ComfyUI/custom_nodes/ComfyUI-Krea2-StyleBridge
 3. workflow を ComfyUI の workflow フォルダ、または任意の場所にコピーします。
 
 ```text
-workflows/krea2_stylebridge_lmstudio_rope_v5_ascii_titles.json
+workflows/krea2_stylebridge_lmstudio_rope_v6_rope_switch.json
 ```
 
 4. ComfyUI を再起動します。
@@ -175,6 +175,8 @@ OFF:
 画像1/画像2そのものの雰囲気までプロンプト化したい場合はこちらです。
 
 ## RoPE設定の目安
+
+`Use RoPE style reference switch - OFF skips RoPE branch` の `use_rope_style_reference` をOFFにすると、`RFInversion` / `UntwistingRoPE` / 画像3のVAE Encode枝をlazy評価でスキップします。スタイル参照を使わない通常生成ではOFFにすると速くなります。
 
 控えめ:
 

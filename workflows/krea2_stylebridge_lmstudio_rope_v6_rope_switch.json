@@ -1,0 +1,2242 @@
+{
+  "id": "2891cec3-9e71-4796-aaeb-d5ba7b57fd59",
+  "revision": 0,
+  "last_node_id": 73,
+  "last_link_id": 125,
+  "nodes": [
+    {
+      "id": 8,
+      "type": "VAEDecode",
+      "pos": [
+        1925.0103515625,
+        130
+      ],
+      "size": [
+        140,
+        46
+      ],
+      "flags": {},
+      "order": 18,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "サンプル",
+          "name": "samples",
+          "type": "LATENT",
+          "link": 18
+        },
+        {
+          "localized_name": "vae",
+          "name": "vae",
+          "type": "VAE",
+          "link": 19
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "画像",
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            29
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.6.2"
+        }
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 28,
+      "type": "EmptyLatentImage",
+      "pos": [
+        619.5216578543597,
+        1410.7377043800072
+      ],
+      "size": [
+        280.3267578125,
+        106
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "幅",
+          "name": "width",
+          "type": "INT",
+          "widget": {
+            "name": "width"
+          },
+          "link": 27
+        },
+        {
+          "localized_name": "高さ",
+          "name": "height",
+          "type": "INT",
+          "widget": {
+            "name": "height"
+          },
+          "link": 28
+        },
+        {
+          "localized_name": "バッチサイズ",
+          "name": "batch_size",
+          "type": "INT",
+          "widget": {
+            "name": "batch_size"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "潜在",
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            26
+          ]
+        }
+      ],
+      "title": "Krea latent size from area dropdown",
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.6.2"
+        }
+      },
+      "widgets_values": [
+        512,
+        512,
+        1
+      ]
+    },
+    {
+      "id": 63,
+      "type": "ApplyKrea2NegPiP",
+      "pos": [
+        899.793168678666,
+        -188.16918545449857
+      ],
+      "size": [
+        327.187109375,
+        174
+      ],
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "model",
+          "name": "model",
+          "type": "MODEL",
+          "link": 110
+        },
+        {
+          "localized_name": "clip",
+          "name": "clip",
+          "type": "CLIP",
+          "link": 103
+        },
+        {
+          "localized_name": "value_strength",
+          "name": "value_strength",
+          "type": "FLOAT",
+          "widget": {
+            "name": "value_strength"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "patch_txtfusion_refiners",
+          "name": "patch_txtfusion_refiners",
+          "type": "BOOLEAN",
+          "widget": {
+            "name": "patch_txtfusion_refiners"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "block_start",
+          "name": "block_start",
+          "shape": 7,
+          "type": "INT",
+          "widget": {
+            "name": "block_start"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "block_end",
+          "name": "block_end",
+          "shape": 7,
+          "type": "INT",
+          "widget": {
+            "name": "block_end"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "block_stride",
+          "name": "block_stride",
+          "shape": 7,
+          "type": "INT",
+          "widget": {
+            "name": "block_stride"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "model",
+          "name": "model",
+          "type": "MODEL",
+          "slot_index": 0,
+          "links": [
+            117,
+            124
+          ]
+        },
+        {
+          "localized_name": "clip",
+          "name": "clip",
+          "type": "CLIP",
+          "slot_index": 1,
+          "links": [
+            105,
+            106,
+            116
+          ]
+        }
+      ],
+      "title": "Apply Krea2 NegPiP (required for -weights)",
+      "properties": {
+        "Node name for S&R": "ApplyKrea2NegPiP",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.6.2",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        1,
+        false,
+        0,
+        27,
+        1
+      ]
+    },
+    {
+      "id": 11,
+      "type": "CLIPTextEncode",
+      "pos": [
+        1089.4164472091197,
+        153.1165678273233
+      ],
+      "size": [
+        374.4166015625,
+        88
+      ],
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "クリップ",
+          "name": "clip",
+          "type": "CLIP",
+          "link": 105
+        },
+        {
+          "localized_name": "テキスト",
+          "name": "text",
+          "type": "STRING",
+          "widget": {
+            "name": "text"
+          },
+          "link": 101
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "条件付け",
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            107
+          ]
+        }
+      ],
+      "title": "Krea Positive Prompt (LM Studio + Avoid -weights)",
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.6.2"
+        }
+      },
+      "widgets_values": [
+        ""
+      ]
+    },
+    {
+      "id": 15,
+      "type": "VAELoader",
+      "pos": [
+        21.94131938684987,
+        69.50452252480865
+      ],
+      "size": [
+        339.6023036953766,
+        150.36942879988646
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "vae_name",
+          "name": "vae_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "vae_name"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "VAE",
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            19,
+            115
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.6.2"
+        }
+      },
+      "widgets_values": [
+        "qwen_image_vae.safetensors"
+      ]
+    },
+    {
+      "id": 45,
+      "type": "CLIPLoader",
+      "pos": [
+        18.688894212650993,
+        430.47524177228087
+      ],
+      "size": [
+        374.07826066888254,
+        150.8837413525613
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "clip名",
+          "name": "clip_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "clip_name"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "タイプ",
+          "name": "type",
+          "type": "COMBO",
+          "widget": {
+            "name": "type"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "デバイス",
+          "name": "device",
+          "shape": 7,
+          "type": "COMBO",
+          "widget": {
+            "name": "device"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "CLIP",
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            103
+          ]
+        }
+      ],
+      "title": "Krea 2 Text Encoder BF16",
+      "properties": {
+        "Node name for S&R": "CLIPLoader",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.6.2"
+        }
+      },
+      "widgets_values": [
+        "qwen3vl_4b_fp8_scaled.safetensors",
+        "krea2",
+        "default"
+      ]
+    },
+    {
+      "id": 46,
+      "type": "SaveImage",
+      "pos": [
+        -465.70960256606384,
+        760.5243961921522
+      ],
+      "size": [
+        500.0756083338915,
+        611.297631818677
+      ],
+      "flags": {},
+      "order": 19,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "画像",
+          "name": "images",
+          "type": "IMAGE",
+          "link": 29
+        },
+        {
+          "localized_name": "ファイル名_プレフィックス",
+          "name": "filename_prefix",
+          "type": "STRING",
+          "widget": {
+            "name": "filename_prefix"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "images",
+          "name": "images",
+          "type": "IMAGE",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SaveImage",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.6.2"
+        }
+      },
+      "widgets_values": [
+        "krea2_stylebridge"
+      ]
+    },
+    {
+      "id": 62,
+      "type": "KreaPromptAvoidWeights",
+      "pos": [
+        1066.5056019506333,
+        1118.988037322406
+      ],
+      "size": [
+        712.8571428571415,
+        506.3810163225446
+      ],
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "base_prompt",
+          "name": "base_prompt",
+          "type": "STRING",
+          "widget": {
+            "name": "base_prompt"
+          },
+          "link": 100
+        },
+        {
+          "localized_name": "extra_prompt",
+          "name": "extra_prompt",
+          "type": "STRING",
+          "widget": {
+            "name": "extra_prompt"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "avoid_prompt",
+          "name": "avoid_prompt",
+          "type": "STRING",
+          "widget": {
+            "name": "avoid_prompt"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "avoid_weight",
+          "name": "avoid_weight",
+          "type": "FLOAT",
+          "widget": {
+            "name": "avoid_weight"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "prompt",
+          "name": "prompt",
+          "type": "STRING",
+          "slot_index": 0,
+          "links": [
+            101
+          ]
+        },
+        {
+          "localized_name": "weighted_avoid",
+          "name": "weighted_avoid",
+          "type": "STRING",
+          "slot_index": 1,
+          "links": null
+        }
+      ],
+      "title": "Content prompt + Avoid terms; style comes from image 3 RoPE",
+      "properties": {
+        "Node name for S&R": "KreaPromptAvoidWeights",
+        "ue_properties": {
+          "widget_ue_connectable": {
+            "base_prompt": true
+          },
+          "version": "7.6.2",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "",
+        "single coherent composition, preserve the content prompt, avoid copying the style reference composition, maintain clear subject structure and stable clothing details",
+        "split screen\nsplit-screen\ndiptych\ntriptych\ntwo panels\nmultiple panels\npanel border\ncomic panel\nmanga panel\ncollage\ncontact sheet\ngrid layout\ntiled image\nrepeated image\nduplicate frame\nduplicated character\ntwo copies\nbefore and after\ncomparison layout\nhorizontal divider\nvertical divider\nstacked frames\ntop and bottom panels\nsame scene repeated\nmirrored layout\npicture-in-picture\ncopied composition from style reference\nunwanted second character\nextra character\nextra person\ntransparent clothing\ntranslucent clothing\nsee-through clothing\nrevealing outfit\nlingerie\nexposed underwear\nexposed chest\nexposed torso\nskimpy outfit",
+        -1
+      ]
+    },
+    {
+      "id": 64,
+      "type": "KreaHighStrengthLoraModelOnly",
+      "pos": [
+        303.8460904679931,
+        -164.8898738428544
+      ],
+      "size": [
+        358.1880859375,
+        86
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "model",
+          "name": "model",
+          "type": "MODEL",
+          "link": 109
+        },
+        {
+          "localized_name": "lora_name",
+          "name": "lora_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "lora_name"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "strength_model",
+          "name": "strength_model",
+          "type": "FLOAT",
+          "widget": {
+            "name": "strength_model"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "model",
+          "name": "model",
+          "type": "MODEL",
+          "slot_index": 0,
+          "links": [
+            110
+          ]
+        }
+      ],
+      "title": "Optional Krea2 modifier LoRA / filter bypass (None by default)",
+      "properties": {
+        "Node name for S&R": "KreaHighStrengthLoraModelOnly",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.6.2",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "None",
+        0.0
+      ]
+    },
+    {
+      "id": 12,
+      "type": "CLIPTextEncode",
+      "pos": [
+        1274.5376196537175,
+        -126.01620747166017
+      ],
+      "size": [
+        391.61907958984375,
+        88
+      ],
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "クリップ",
+          "name": "clip",
+          "type": "CLIP",
+          "link": 106
+        },
+        {
+          "localized_name": "テキスト",
+          "name": "text",
+          "type": "STRING",
+          "widget": {
+            "name": "text"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "条件付け",
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            108
+          ]
+        }
+      ],
+      "title": "Empty Negative (Krea2: use Avoid -weights instead)",
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.6.2"
+        }
+      },
+      "widgets_values": [
+        ""
+      ]
+    },
+    {
+      "id": 19,
+      "type": "KSampler",
+      "pos": [
+        555.9626743861751,
+        309.0476771763366
+      ],
+      "size": [
+        270,
+        262
+      ],
+      "flags": {},
+      "order": 17,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "モデル",
+          "name": "model",
+          "type": "MODEL",
+          "link": 125
+        },
+        {
+          "localized_name": "ポジティブ",
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 107
+        },
+        {
+          "localized_name": "ネガティブ",
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 108
+        },
+        {
+          "localized_name": "潜在画像",
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 26
+        },
+        {
+          "localized_name": "シード",
+          "name": "seed",
+          "type": "INT",
+          "widget": {
+            "name": "seed"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "ステップ",
+          "name": "steps",
+          "type": "INT",
+          "widget": {
+            "name": "steps"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "cfg",
+          "name": "cfg",
+          "type": "FLOAT",
+          "widget": {
+            "name": "cfg"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "サンプラー名",
+          "name": "sampler_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "sampler_name"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "スケジューラ",
+          "name": "scheduler",
+          "type": "COMBO",
+          "widget": {
+            "name": "scheduler"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "ノイズ除去",
+          "name": "denoise",
+          "type": "FLOAT",
+          "widget": {
+            "name": "denoise"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "潜在",
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            18
+          ]
+        }
+      ],
+      "title": "Krea 2 Turbo Sampler",
+      "properties": {
+        "Node name for S&R": "KSampler",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.6.2"
+        }
+      },
+      "widgets_values": [
+        773750516214746,
+        "randomize",
+        8,
+        1,
+        "er_sde",
+        "simple",
+        1
+      ]
+    },
+    {
+      "id": 44,
+      "type": "UNETLoader",
+      "pos": [
+        25.844268306019057,
+        287.4269770571515
+      ],
+      "size": [
+        343.1080078125,
+        82
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "unet_name",
+          "name": "unet_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "unet_name"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "重みdtype",
+          "name": "weight_dtype",
+          "type": "COMBO",
+          "widget": {
+            "name": "weight_dtype"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "モデル",
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            34
+          ]
+        }
+      ],
+      "title": "Diffusion model dropdown - Krea 2 / RedCraft",
+      "properties": {
+        "Node name for S&R": "UNETLoader",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.6.2"
+        }
+      },
+      "widgets_values": [
+        "Krea2\\krea2_turbo_fp8_scaled.safetensors",
+        "default"
+      ]
+    },
+    {
+      "id": 49,
+      "type": "LoadImage",
+      "pos": [
+        138.36258792134228,
+        700.5509137948982
+      ],
+      "size": [
+        315,
+        150
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "localized_name": "IMAGE",
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            30
+          ]
+        },
+        {
+          "localized_name": "MASK",
+          "name": "MASK",
+          "type": "MASK",
+          "links": null
+        }
+      ],
+      "title": "Content image 1",
+      "properties": {
+        "Node name for S&R": "LoadImage",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.6.2"
+        }
+      },
+      "widgets_values": [
+        "example.png",
+        "image"
+      ],
+      "color": "#2e3e57",
+      "bgcolor": "#4b5b73"
+    },
+    {
+      "id": 57,
+      "type": "LoadImage",
+      "pos": [
+        126.40301952244674,
+        1282.9952441021906
+      ],
+      "size": [
+        315,
+        150
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "localized_name": "IMAGE",
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            31
+          ]
+        },
+        {
+          "localized_name": "MASK",
+          "name": "MASK",
+          "type": "MASK",
+          "links": null
+        }
+      ],
+      "title": "Content image 2",
+      "properties": {
+        "Node name for S&R": "LoadImage",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.6.2"
+        }
+      },
+      "widgets_values": [
+        "example.png",
+        "image"
+      ],
+      "color": "#2e3e57",
+      "bgcolor": "#4b5b73"
+    },
+    {
+      "id": 58,
+      "type": "KreaAspectRatioAreaSizeV2",
+      "pos": [
+        482.5265643447427,
+        1651.1286678742056
+      ],
+      "size": [
+        355.0103515625,
+        190
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "aspect_ratio",
+          "name": "aspect_ratio",
+          "type": "COMBO",
+          "widget": {
+            "name": "aspect_ratio"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "base_size",
+          "name": "base_size",
+          "type": "COMBO",
+          "widget": {
+            "name": "base_size"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "custom_aspect_width",
+          "name": "custom_aspect_width",
+          "type": "INT",
+          "widget": {
+            "name": "custom_aspect_width"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "custom_aspect_height",
+          "name": "custom_aspect_height",
+          "type": "INT",
+          "widget": {
+            "name": "custom_aspect_height"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "width",
+          "name": "width",
+          "type": "INT",
+          "links": [
+            27,
+            112
+          ]
+        },
+        {
+          "localized_name": "height",
+          "name": "height",
+          "type": "INT",
+          "links": [
+            28,
+            113
+          ]
+        },
+        {
+          "localized_name": "label",
+          "name": "label",
+          "type": "STRING",
+          "links": null
+        },
+        {
+          "localized_name": "area",
+          "name": "area",
+          "type": "INT",
+          "links": null
+        }
+      ],
+      "title": "Area aspect dropdown - base size switch",
+      "properties": {
+        "Node name for S&R": "KreaAspectRatioAreaSizeV2",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.6.2"
+        }
+      },
+      "widgets_values": [
+        "2:3 portrait",
+        "1280",
+        1,
+        1
+      ]
+    },
+    {
+      "id": 60,
+      "type": "KreaHighStrengthLoraModelOnly",
+      "pos": [
+        458.6197638587298,
+        33.66314874963725
+      ],
+      "size": [
+        364.3677734375,
+        82
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "model",
+          "name": "model",
+          "type": "MODEL",
+          "link": 34
+        },
+        {
+          "localized_name": "lora_name",
+          "name": "lora_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "lora_name"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "strength_model",
+          "name": "strength_model",
+          "type": "FLOAT",
+          "widget": {
+            "name": "strength_model"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "model",
+          "name": "model",
+          "type": "MODEL",
+          "slot_index": 0,
+          "links": [
+            109
+          ]
+        }
+      ],
+      "title": "Optional user LoRA (None by default)",
+      "properties": {
+        "Node name for S&R": "KreaHighStrengthLoraModelOnly",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.6.2"
+        }
+      },
+      "widgets_values": [
+        "None",
+        0.0
+      ]
+    },
+    {
+      "id": 50,
+      "type": "LMStudioPromptControlV4",
+      "pos": [
+        555.0103515625,
+        672
+      ],
+      "size": [
+        520,
+        620
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "image_1",
+          "name": "image_1",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 30
+        },
+        {
+          "localized_name": "image_2",
+          "name": "image_2",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 31
+        },
+        {
+          "localized_name": "use_text_prompt",
+          "name": "use_text_prompt",
+          "type": "BOOLEAN",
+          "widget": {
+            "name": "use_text_prompt"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "use_image_1",
+          "name": "use_image_1",
+          "type": "BOOLEAN",
+          "widget": {
+            "name": "use_image_1"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "use_image_2",
+          "name": "use_image_2",
+          "type": "BOOLEAN",
+          "widget": {
+            "name": "use_image_2"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "faithful_image_prompt",
+          "name": "faithful_image_prompt",
+          "type": "BOOLEAN",
+          "widget": {
+            "name": "faithful_image_prompt"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "exclude_style_from_prompt",
+          "name": "exclude_style_from_prompt",
+          "type": "BOOLEAN",
+          "widget": {
+            "name": "exclude_style_from_prompt"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "base_url",
+          "name": "base_url",
+          "type": "STRING",
+          "widget": {
+            "name": "base_url"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "model",
+          "name": "model",
+          "type": "STRING",
+          "widget": {
+            "name": "model"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "instruction",
+          "name": "instruction",
+          "type": "STRING",
+          "widget": {
+            "name": "instruction"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "text_prompt",
+          "name": "text_prompt",
+          "type": "STRING",
+          "widget": {
+            "name": "text_prompt"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "extra_prompt",
+          "name": "extra_prompt",
+          "type": "STRING",
+          "widget": {
+            "name": "extra_prompt"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "max_tokens",
+          "name": "max_tokens",
+          "type": "INT",
+          "widget": {
+            "name": "max_tokens"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "temperature",
+          "name": "temperature",
+          "type": "FLOAT",
+          "widget": {
+            "name": "temperature"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "timeout_seconds",
+          "name": "timeout_seconds",
+          "type": "INT",
+          "widget": {
+            "name": "timeout_seconds"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "prompt",
+          "name": "prompt",
+          "type": "STRING",
+          "links": [
+            100
+          ]
+        }
+      ],
+      "title": "LM Studio prompt controls: Japanese/text + image content",
+      "properties": {
+        "Node name for S&R": "LMStudioPromptControlV4",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.6.2"
+        }
+      },
+      "widgets_values": [
+        true,
+        false,
+        false,
+        true,
+        true,
+        "http://127.0.0.1:1234/v1",
+        "qwen3-vl-32b-instruct",
+        "You are writing a Krea 2 Turbo prompt from enabled user text and image references. Follow the two workflow control switches exactly.\n\nIf faithful_image_prompt is ON, describe the enabled content image references as faithfully as possible: subject, pose, expression, clothing, accessories, props, object colors, spatial layout, background objects, location, and framing. If faithful_image_prompt is OFF, use the enabled sources as loose inspiration and make a coherent final scene that follows the user text.\n\nIf exclude_style_from_prompt is ON, do not describe art style, rendering style, medium, artist influence, camera film stock, illustration type, model aesthetic, texture treatment, color grading, line art, cel shading, painterly quality, photorealism, anime style, 3D style, cinematic look, grain, bokeh, lens effects, lighting treatment, atmosphere, mood, or overall finish. If exclude_style_from_prompt is OFF, you may include visible style and finish details from the enabled image references, but keep them concise and do not override the user text.\n\nIf use_text_prompt is enabled, the user text is mandatory and has highest priority. If the user text is Japanese or another non-English language, translate its meaning into natural English and blend it with enabled visual content. If no content image is enabled, expand only the user text and do not invent a different main subject.\n\nCreate one coherent final scene with one subject arrangement, one camera view, and one continuous physical space. Do not mention references as references, examples, panels, comparisons, before-and-after views, split screens, collages, or separate sources. Do not invent unrelated objects, extra characters, animals, costumes, or backgrounds unless the user text explicitly requests them. Keep clothing dignified and non-revealing.\n\nWrite one polished English paragraph of 90 to 190 words. No markdown, bullets, labels, explanations, or analysis.",
+        "a cat relaxing in warm sunlight",
+        "preserve the visible subject, pose, clothing, props, setting, and spatial layout from the enabled content references",
+        900,
+        0.15,
+        240
+      ]
+    },
+    {
+      "id": 65,
+      "type": "LoadImage",
+      "pos": [
+        -430,
+        1850
+      ],
+      "size": [
+        315,
+        150
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "localized_name": "IMAGE",
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            111
+          ]
+        },
+        {
+          "localized_name": "MASK",
+          "name": "MASK",
+          "type": "MASK",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.6.2"
+        }
+      },
+      "widgets_values": [
+        "example.png",
+        "image"
+      ],
+      "title": "Style reference image 3"
+    },
+    {
+      "id": 66,
+      "type": "ImageScale",
+      "pos": [
+        40,
+        1900
+      ],
+      "size": [
+        315,
+        154
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "image",
+          "name": "image",
+          "type": "IMAGE",
+          "link": 111
+        },
+        {
+          "localized_name": "upscale_method",
+          "name": "upscale_method",
+          "type": "COMBO",
+          "widget": {
+            "name": "upscale_method"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "width",
+          "name": "width",
+          "type": "INT",
+          "widget": {
+            "name": "width"
+          },
+          "link": 112
+        },
+        {
+          "localized_name": "height",
+          "name": "height",
+          "type": "INT",
+          "widget": {
+            "name": "height"
+          },
+          "link": 113
+        },
+        {
+          "localized_name": "crop",
+          "name": "crop",
+          "type": "COMBO",
+          "widget": {
+            "name": "crop"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "IMAGE",
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            114
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ImageScale",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.6.2"
+        }
+      },
+      "widgets_values": [
+        "lanczos",
+        512,
+        512,
+        "center"
+      ],
+      "title": "Style image resize to final aspect/size"
+    },
+    {
+      "id": 67,
+      "type": "VAEEncode",
+      "pos": [
+        430,
+        1915
+      ],
+      "size": [
+        210,
+        70
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "pixels",
+          "name": "pixels",
+          "type": "IMAGE",
+          "link": 114
+        },
+        {
+          "localized_name": "vae",
+          "name": "vae",
+          "type": "VAE",
+          "link": 115
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "LATENT",
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            118
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEEncode",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.6.2"
+        }
+      },
+      "widgets_values": [],
+      "title": "Style reference VAE Encode"
+    },
+    {
+      "id": 68,
+      "type": "CLIPTextEncode",
+      "pos": [
+        910,
+        625
+      ],
+      "size": [
+        420,
+        120
+      ],
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "clip",
+          "name": "clip",
+          "type": "CLIP",
+          "link": 116
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "CONDITIONING",
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            119
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.6.2"
+        }
+      },
+      "widgets_values": [
+        ""
+      ],
+      "title": "Empty conditioning for style reference"
+    },
+    {
+      "id": 69,
+      "type": "RFInversion",
+      "pos": [
+        1315,
+        -105
+      ],
+      "size": [
+        330,
+        230
+      ],
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "model",
+          "name": "model",
+          "type": "MODEL",
+          "link": 117
+        },
+        {
+          "localized_name": "reference_latent",
+          "name": "reference_latent",
+          "type": "LATENT",
+          "link": 118
+        },
+        {
+          "localized_name": "ref_conditioning",
+          "name": "ref_conditioning",
+          "type": "CONDITIONING",
+          "link": 119
+        },
+        {
+          "localized_name": "rf_mode",
+          "name": "rf_mode",
+          "type": "COMBO",
+          "widget": {
+            "name": "rf_mode"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "gamma",
+          "name": "gamma",
+          "type": "FLOAT",
+          "widget": {
+            "name": "gamma"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "pmi_alpha",
+          "name": "pmi_alpha",
+          "type": "FLOAT",
+          "widget": {
+            "name": "pmi_alpha"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "otip_strength",
+          "name": "otip_strength",
+          "type": "FLOAT",
+          "widget": {
+            "name": "otip_strength"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "otip_clip_norm",
+          "name": "otip_clip_norm",
+          "type": "FLOAT",
+          "widget": {
+            "name": "otip_clip_norm"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "verbose",
+          "name": "verbose",
+          "type": "BOOLEAN",
+          "widget": {
+            "name": "verbose"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "model",
+          "name": "model",
+          "type": "MODEL",
+          "links": [
+            120
+          ]
+        },
+        {
+          "localized_name": "rf_inversion",
+          "name": "rf_inversion",
+          "type": "LATENT",
+          "links": [
+            121
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "RFInversion",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.6.2"
+        }
+      },
+      "widgets_values": [
+        "flowturbo_pc",
+        0.5,
+        0,
+        0,
+        20,
+        false
+      ],
+      "title": "RF Inversion from style reference"
+    },
+    {
+      "id": 70,
+      "type": "UnofficialExtensions",
+      "pos": [
+        1310,
+        195
+      ],
+      "size": [
+        360,
+        180
+      ],
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "post_attention_adain_strength",
+          "name": "post_attention_adain_strength",
+          "type": "FLOAT",
+          "widget": {
+            "name": "post_attention_adain_strength"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "axis0_rope_mode",
+          "name": "axis0_rope_mode",
+          "type": "COMBO",
+          "widget": {
+            "name": "axis0_rope_mode"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "axis0_rope_scale",
+          "name": "axis0_rope_scale",
+          "type": "FLOAT",
+          "widget": {
+            "name": "axis0_rope_scale"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "cosine_gated_v_injection",
+          "name": "cosine_gated_v_injection",
+          "type": "FLOAT",
+          "widget": {
+            "name": "cosine_gated_v_injection"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "variance_gated_v_adain",
+          "name": "variance_gated_v_adain",
+          "type": "FLOAT",
+          "widget": {
+            "name": "variance_gated_v_adain"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "key_subspace_alignment",
+          "name": "key_subspace_alignment",
+          "type": "FLOAT",
+          "widget": {
+            "name": "key_subspace_alignment"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "unofficial_extensions",
+          "name": "unofficial_extensions",
+          "type": "UNTWISTING_ROPE_EXTENSIONS",
+          "links": [
+            122
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UnofficialExtensions",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.6.2"
+        }
+      },
+      "widgets_values": [
+        0,
+        "default",
+        0,
+        0,
+        0,
+        0
+      ],
+      "title": "RoPE optional style leak controls"
+    },
+    {
+      "id": 71,
+      "type": "UntwistingRoPE",
+      "pos": [
+        1690,
+        -100
+      ],
+      "size": [
+        365,
+        255
+      ],
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "model",
+          "name": "model",
+          "type": "MODEL",
+          "link": 120
+        },
+        {
+          "localized_name": "rf_inversion",
+          "name": "rf_inversion",
+          "type": "LATENT",
+          "link": 121
+        },
+        {
+          "localized_name": "unofficial_extensions",
+          "name": "unofficial_extensions",
+          "type": "UNTWISTING_ROPE_EXTENSIONS",
+          "link": 122
+        },
+        {
+          "localized_name": "beta",
+          "name": "beta",
+          "type": "FLOAT",
+          "widget": {
+            "name": "beta"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "high_scale_start",
+          "name": "high_scale_start",
+          "type": "FLOAT",
+          "widget": {
+            "name": "high_scale_start"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "high_scale_end",
+          "name": "high_scale_end",
+          "type": "FLOAT",
+          "widget": {
+            "name": "high_scale_end"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "low_scale_start",
+          "name": "low_scale_start",
+          "type": "FLOAT",
+          "widget": {
+            "name": "low_scale_start"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "low_scale_end",
+          "name": "low_scale_end",
+          "type": "FLOAT",
+          "widget": {
+            "name": "low_scale_end"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "adain_strength",
+          "name": "adain_strength",
+          "type": "FLOAT",
+          "widget": {
+            "name": "adain_strength"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "blocks",
+          "name": "blocks",
+          "type": "STRING",
+          "widget": {
+            "name": "blocks"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "verbose",
+          "name": "verbose",
+          "type": "BOOLEAN",
+          "widget": {
+            "name": "verbose"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "model",
+          "name": "model",
+          "type": "MODEL",
+          "links": [
+            123
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UntwistingRoPE",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.6.2"
+        }
+      },
+      "widgets_values": [
+        3.0,
+        1.03,
+        0,
+        1,
+        1.2,
+        0.65,
+        "10-27",
+        false
+      ],
+      "title": "Untwisting RoPE style transfer strength"
+    },
+    {
+      "id": 72,
+      "type": "Note",
+      "pos": [
+        -430,
+        2260
+      ],
+      "size": [
+        540,
+        170
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "Note",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.6.2"
+        }
+      },
+      "widgets_values": [
+        "Krea2 StyleBridge: image 1/2 are content references for LM Studio. image 3 is the RoPE style reference. use_text_prompt enables Japanese/text input. faithful_image_prompt controls how closely image 1/2 are described. exclude_style_from_prompt keeps style words out of the LM prompt so image 3 controls style."
+      ],
+      "title": "How to use style reference"
+    },
+    {
+      "id": 73,
+      "type": "KreaModelRoPESwitchLazy",
+      "pos": [
+        1700,
+        210
+      ],
+      "size": [
+        390,
+        120
+      ],
+      "flags": {},
+      "order": 17,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "use_rope_style_reference",
+          "name": "use_rope_style_reference",
+          "type": "BOOLEAN",
+          "widget": {
+            "name": "use_rope_style_reference"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "model_without_rope",
+          "name": "model_without_rope",
+          "type": "MODEL",
+          "link": 124
+        },
+        {
+          "localized_name": "model_with_rope",
+          "name": "model_with_rope",
+          "type": "MODEL",
+          "link": 123
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "model",
+          "name": "model",
+          "type": "MODEL",
+          "slot_index": 0,
+          "links": [
+            125
+          ]
+        }
+      ],
+      "title": "Use RoPE style reference switch - OFF skips RoPE branch",
+      "properties": {
+        "Node name for S&R": "KreaModelRoPESwitchLazy"
+      },
+      "widgets_values": [
+        true
+      ]
+    }
+  ],
+  "links": [
+    [
+      18,
+      19,
+      0,
+      8,
+      0,
+      "LATENT"
+    ],
+    [
+      19,
+      15,
+      0,
+      8,
+      1,
+      "VAE"
+    ],
+    [
+      26,
+      28,
+      0,
+      19,
+      3,
+      "LATENT"
+    ],
+    [
+      27,
+      58,
+      0,
+      28,
+      0,
+      "INT"
+    ],
+    [
+      28,
+      58,
+      1,
+      28,
+      1,
+      "INT"
+    ],
+    [
+      29,
+      8,
+      0,
+      46,
+      0,
+      "IMAGE"
+    ],
+    [
+      30,
+      49,
+      0,
+      50,
+      0,
+      "IMAGE"
+    ],
+    [
+      31,
+      57,
+      0,
+      50,
+      1,
+      "IMAGE"
+    ],
+    [
+      34,
+      44,
+      0,
+      60,
+      0,
+      "MODEL"
+    ],
+    [
+      100,
+      50,
+      0,
+      62,
+      0,
+      "STRING"
+    ],
+    [
+      101,
+      62,
+      0,
+      11,
+      1,
+      "STRING"
+    ],
+    [
+      103,
+      45,
+      0,
+      63,
+      1,
+      "CLIP"
+    ],
+    [
+      105,
+      63,
+      1,
+      11,
+      0,
+      "CLIP"
+    ],
+    [
+      106,
+      63,
+      1,
+      12,
+      0,
+      "CLIP"
+    ],
+    [
+      107,
+      11,
+      0,
+      19,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      108,
+      12,
+      0,
+      19,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      109,
+      60,
+      0,
+      64,
+      0,
+      "MODEL"
+    ],
+    [
+      110,
+      64,
+      0,
+      63,
+      0,
+      "MODEL"
+    ],
+    [
+      111,
+      65,
+      0,
+      66,
+      0,
+      "IMAGE"
+    ],
+    [
+      112,
+      58,
+      0,
+      66,
+      2,
+      "INT"
+    ],
+    [
+      113,
+      58,
+      1,
+      66,
+      3,
+      "INT"
+    ],
+    [
+      114,
+      66,
+      0,
+      67,
+      0,
+      "IMAGE"
+    ],
+    [
+      115,
+      15,
+      0,
+      67,
+      1,
+      "VAE"
+    ],
+    [
+      116,
+      63,
+      1,
+      68,
+      0,
+      "CLIP"
+    ],
+    [
+      117,
+      63,
+      0,
+      69,
+      0,
+      "MODEL"
+    ],
+    [
+      118,
+      67,
+      0,
+      69,
+      1,
+      "LATENT"
+    ],
+    [
+      119,
+      68,
+      0,
+      69,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      120,
+      69,
+      0,
+      71,
+      0,
+      "MODEL"
+    ],
+    [
+      121,
+      69,
+      1,
+      71,
+      1,
+      "LATENT"
+    ],
+    [
+      122,
+      70,
+      0,
+      71,
+      2,
+      "UNTWISTING_ROPE_EXTENSIONS"
+    ],
+    [
+      123,
+      71,
+      0,
+      19,
+      0,
+      "MODEL"
+    ],
+    [
+      124,
+      63,
+      0,
+      73,
+      1,
+      "MODEL"
+    ],
+    [
+      125,
+      73,
+      0,
+      19,
+      0,
+      "MODEL"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ue_links": [],
+    "ds": {
+      "scale": 1.5005121670000257,
+      "offset": [
+        -10.363294937082514,
+        -526.3358282109479
+      ]
+    },
+    "links_added_by_ue": [],
+    "frontendVersion": "1.45.19",
+    "VHS_latentpreview": false,
+    "VHS_latentpreviewrate": 0,
+    "VHS_MetadataImage": true,
+    "VHS_KeepIntermediate": true
+  },
+  "version": 0.4
+}

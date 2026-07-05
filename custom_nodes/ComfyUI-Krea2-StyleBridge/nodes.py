@@ -383,6 +383,33 @@ class KreaHighStrengthLoraModelOnly:
         return (model_lora,)
 
 
+class KreaModelRoPESwitchLazy:
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {
+                "use_rope_style_reference": ("BOOLEAN", {"default": True}),
+                "model_without_rope": ("MODEL", {"lazy": True}),
+                "model_with_rope": ("MODEL", {"lazy": True}),
+            }
+        }
+
+    RETURN_TYPES = ("MODEL",)
+    RETURN_NAMES = ("model",)
+    FUNCTION = "choose"
+    CATEGORY = "Krea2 StyleBridge/Krea2"
+
+    def check_lazy_status(self, use_rope_style_reference, model_without_rope=None, model_with_rope=None):
+        if use_rope_style_reference and model_with_rope is None:
+            return ["model_with_rope"]
+        if not use_rope_style_reference and model_without_rope is None:
+            return ["model_without_rope"]
+        return []
+
+    def choose(self, use_rope_style_reference, model_without_rope, model_with_rope):
+        return (model_with_rope if use_rope_style_reference else model_without_rope,)
+
+
 class KreaAspectRatioAreaSizeV2:
     RATIOS = {
         "1:1 square": (1, 1),
@@ -432,6 +459,7 @@ NODE_CLASS_MAPPINGS = {
     "LMStudioPromptControlV4": LMStudioPromptControlV4,
     "KreaPromptAvoidWeights": KreaPromptAvoidWeights,
     "KreaHighStrengthLoraModelOnly": KreaHighStrengthLoraModelOnly,
+    "KreaModelRoPESwitchLazy": KreaModelRoPESwitchLazy,
     "KreaAspectRatioAreaSizeV2": KreaAspectRatioAreaSizeV2,
 }
 
@@ -439,5 +467,6 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "LMStudioPromptControlV4": "LM Studio Prompt Control V4 Faithful/NoStyle",
     "KreaPromptAvoidWeights": "Krea Prompt + Avoid (-weights)",
     "KreaHighStrengthLoraModelOnly": "Krea High Strength LoRA Model Only",
+    "KreaModelRoPESwitchLazy": "Krea Model RoPE Switch Lazy",
     "KreaAspectRatioAreaSizeV2": "Krea Aspect Ratio Size by Base Switch",
 }
