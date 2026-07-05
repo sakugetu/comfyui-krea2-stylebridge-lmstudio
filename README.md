@@ -4,6 +4,10 @@ Krea2 StyleBridge is an unofficial ComfyUI workflow that separates **what to dra
 
 日本語の指示文や参照画像を LM Studio で Krea 2 向けの英語プロンプトにまとめ、別のスタイル参照画像を Untwisting RoPE / RF Inversion 経由で Krea 2 に渡すためのワークフローです。
 
+## サンプル画面
+
+![Krea2 StyleBridge workflow screenshot](docs/images/sample-workflow.png)
+
 ## 何ができるか
 
 - 日本語テキストを LM Studio で英語の Krea 2 向けプロンプトに変換する

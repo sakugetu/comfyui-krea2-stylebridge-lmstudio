@@ -5,9 +5,14 @@ Thumbs.db
 *.log
 *.tmp
 *.png
+!docs/images/
+!docs/images/*.png
 *.jpg
+!docs/images/*.jpg
 *.jpeg
+!docs/images/*.jpeg
 *.webp
+!docs/images/*.webp
 *.safetensors
 *.ckpt
 *.pt
