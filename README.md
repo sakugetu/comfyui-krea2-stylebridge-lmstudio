@@ -35,7 +35,7 @@ Krea2 StyleBridge is an unofficial ComfyUI workflow that separates **what to dra
 ## 同梱ファイル
 
 ```text
-workflows/krea2_stylebridge_lmstudio_rope_v4.json
+workflows/krea2_stylebridge_lmstudio_rope_v5_ascii_titles.json
 custom_nodes/ComfyUI-Krea2-StyleBridge/
 ```
 
@@ -82,7 +82,7 @@ ComfyUI/custom_nodes/ComfyUI-Krea2-StyleBridge
 3. workflow を ComfyUI の workflow フォルダ、または任意の場所にコピーします。
 
 ```text
-workflows/krea2_stylebridge_lmstudio_rope_v4.json
+workflows/krea2_stylebridge_lmstudio_rope_v5_ascii_titles.json
 ```
 
 4. ComfyUI を再起動します。

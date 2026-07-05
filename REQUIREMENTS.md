@@ -218,7 +218,7 @@ The workflow uses these node types:
 6. Add the Krea2 adapter under Untwisting RoPE's `models` folder.
 7. Start LM Studio and load a vision-capable model.
 8. Start ComfyUI.
-9. Open `workflows/krea2_stylebridge_lmstudio_rope_v4.json`.
+9. Open `workflows/krea2_stylebridge_lmstudio_rope_v5_ascii_titles.json`.
 10. Select image 1/2 for content and image 3 for style.
 11. Adjust model dropdowns to your local file names.
 
