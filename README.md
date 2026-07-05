@@ -44,6 +44,7 @@ custom_nodes/ComfyUI-Krea2-StyleBridge/
 - `LMStudioPromptControlV4`
 - `KreaPromptAvoidWeights`
 - `KreaHighStrengthLoraModelOnly`
+- `KreaModelRoPESwitchLazy`
 - `KreaAspectRatioAreaSizeV2`
 
 ## 必要なもの
@@ -70,7 +71,7 @@ Untwisting RoPE 側は、Krea2対応adapterが必要です。環境によって�
 1. このリポジトリを clone します。
 
 ```bash
-git clone https://github.com/<your-name>/comfyui-krea2-stylebridge-lmstudio.git
+git clone https://github.com/sakugetu/comfyui-krea2-stylebridge-lmstudio.git
 ```
 
 2. custom node を ComfyUI にコピーします。
@@ -173,6 +174,16 @@ OFF:
 ```
 
 画像1/画像2そのものの雰囲気までプロンプト化したい場合はこちらです。
+
+重要: `exclude_style_from_prompt` は、画像1/画像2から読み取った画風を除外するためのスイッチです。ユーザーが `text_prompt` に直接書いた画風指定は消しません。
+
+例:
+
+```text
+猫が日向ぼっこをしている、日本のアニメスタイル
+```
+
+この場合は、`Japanese anime-style illustration` のように、テキストで指定したアニメスタイルをプロンプトへ残します。ただし、画風指定で主語を置き換えないようにしているため、猫は猫のまま扱われます。
 
 ## RoPE設定の目安
 

@@ -33,6 +33,7 @@ custom_nodes/ComfyUI-Krea2-StyleBridge
 | `LMStudioPromptControlV4` | 日本語テキストや参照画像をLM Studioへ送り、Krea2向け英語プロンプトを返します |
 | `KreaPromptAvoidWeights` | avoid語を `(split screen:-1.00)` のようなKrea2向け負方向ウェイトへ変換します |
 | `KreaHighStrengthLoraModelOnly` | 高strength対応のmodel-only LoRA loaderです。`None` pass-throughに対応しています |
+| `KreaModelRoPESwitchLazy` | RoPEスタイル参照のON/OFFを切り替えます。OFF時はRoPE側の重い枝をlazy評価でスキップします |
 | `KreaAspectRatioAreaSizeV2` | 1024 / 1280の基準面積を切り替えられる画角ドロップダウンです |
 
 インストール先:
@@ -176,6 +177,8 @@ qwen3-vl-32b-instruct
 
 小さいvision modelでも動くことはありますが、日本語テキストを無視したり、画像にない内容を発明したりすることがあります。日本語指示が反映されない場合は、`model` 欄で強めのvision modelを明示してください。
 
+`text_prompt` に直接書いた画風指定は、`exclude_style_from_prompt` がONでも保持されます。たとえば「猫が日向ぼっこをしている、日本のアニメスタイル」は、猫を主語のまま `Japanese anime-style illustration` として扱います。
+
 ## 6. 使用するノード一覧
 
 ### ComfyUI core / Krea2系
@@ -198,6 +201,7 @@ qwen3-vl-32b-instruct
 - `LMStudioPromptControlV4`
 - `KreaPromptAvoidWeights`
 - `KreaHighStrengthLoraModelOnly`
+- `KreaModelRoPESwitchLazy`
 - `KreaAspectRatioAreaSizeV2`
 
 ### 外部custom node
